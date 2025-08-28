@@ -6,27 +6,23 @@
   xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
   xsi:type="TaskPaneApp">
 
-  <!-- Podstawowe metadane -->
   <Id>7b9e5d2d-2d3c-4a8c-9f0a-2db9a9e0a001</Id>
   <Version>1.0.0.0</Version>
   <ProviderName>AddNap</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
 
   <DisplayName DefaultValue="Word Tiles" />
-  <Description DefaultValue="Simple Word task pane add-in with tiles." />
+  <Description DefaultValue="Task pane with draggable tiles and placeholders." />
 
-  <!-- Ikony i wsparcie -->
   <IconUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-32.png" />
   <HighResolutionIconUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-80.png" />
   <SupportUrl DefaultValue="https://github.com/AddNap/word-tiles-addin-github" />
 
-  <!-- (opcjonalnie) domeny, z których będzie ładowana zawartość -->
   <AppDomains>
     <AppDomain>https://addnap.github.io</AppDomain>
     <AppDomain>https://github.com</AppDomain>
   </AppDomains>
 
-  <!-- Host i domyślny task pane -->
   <Hosts>
     <Host Name="Document" />
   </Hosts>
@@ -37,29 +33,24 @@
 
   <Permissions>ReadWriteDocument</Permissions>
 
-  <!-- Komendy wstążki i zasoby -->
   <VersionOverrides xsi:type="VersionOverridesV1_0" xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides">
     <Hosts>
       <Host xsi:type="Document">
         <DesktopFormFactor>
 
-          <!-- Sekcja GetStarted (opcjonalna, ale poprawna) -->
           <GetStarted>
             <Title resid="GetStarted.Title" />
             <Description resid="GetStarted.Description" />
             <LearnMoreUrl resid="GetStarted.LearnMoreUrl" />
           </GetStarted>
 
-          <!-- Plik funkcji dla komend -->
           <FunctionFile resid="Commands.Url" />
 
-          <!-- Komendy na wstążce -->
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
             <OfficeTab id="TabHome">
               <Group id="WordTiles.Group">
                 <Label resid="Group.Label" />
 
-                <!-- UWAGA: Ikona grupy MUSI być przed Control -->
                 <Icon>
                   <bt:Image size="16" resid="Icon.16x16" />
                   <bt:Image size="32" resid="Icon.32x32" />
@@ -90,7 +81,6 @@
       </Host>
     </Hosts>
 
-    <!-- Zasoby: obrazy, URL-e i teksty -->
     <Resources>
       <bt:Images>
         <bt:Image id="Icon.16x16" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-16.png" />
@@ -111,8 +101,8 @@
       </bt:ShortStrings>
 
       <bt:LongStrings>
-        <bt:String id="GetStarted.Description" DefaultValue="This add-in opens a tiles task pane in Word." />
-        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Show the Word Tiles task pane" />
+        <bt:String id="GetStarted.Description" DefaultValue="This add-in shows draggable tiles you can insert into Word." />
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Open the Word Tiles task pane" />
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
