@@ -154,6 +154,45 @@ code {
   margin: 0; padding-left: 10px; color: var(--fg) !important;
 }
 
+/* --- Nadpisania mocne, żeby ignorować style Office --- */
+button, .btn {
+  all: unset;
+  display: inline-block;
+  padding: 8px 12px !important;
+  border-radius: 10px !important;
+  border: 1px solid var(--accent) !important;
+  background: var(--accent) !important;
+  color: var(--accent-contrast) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  text-align: center !important;
+}
+button:hover, .btn:hover {
+  filter: brightness(1.1);
+}
+
+.section {
+  background: var(--card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--shadow) !important;
+}
+
+.placeholder-item {
+  padding: 6px 8px;
+  background: color-mix(in srgb, var(--card), var(--fg) 4%);
+  border-radius: 8px;
+  margin-bottom: 6px;
+  border: 1px solid var(--border);
+}
+.placeholder-item:last-child { margin-bottom: 0; }
+
+.drop-slot {
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+
 /* Preferencje ograniczania animacji */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; }
