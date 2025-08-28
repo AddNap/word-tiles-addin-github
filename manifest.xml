@@ -14,26 +14,31 @@
   <DisplayName DefaultValue="Word Tiles Add-in"/>
   <Description DefaultValue="Tiles based on Content Controls with Inspector &amp; validation."/>
 
-  <!-- Ikony bazowe (pełne HTTPS) -->
-  <IconUrl DefaultValue="https://example.com/assets/icon-32.png"/>
-  <HighResolutionIconUrl DefaultValue="https://example.com/assets/icon-80.png"/>
+  <!-- Ikony hostowane na GitHub Pages -->
+  <IconUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-80.png"/>
 
-  <SupportUrl DefaultValue="https://example.com/support"/>
+  <!-- Strona wsparcia -->
+  <SupportUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/support.html"/>
 
+  <!-- Host: Word -->
   <Hosts>
     <Host Name="Document"/>
   </Hosts>
 
+  <!-- Wymagania API -->
   <Requirements>
     <Sets DefaultMinVersion="1.1">
       <Set Name="WordApi" MinVersion="1.3"/>
     </Sets>
   </Requirements>
 
+  <!-- Domyślna lokalizacja panelu -->
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://example.com/taskpane.html"/>
+    <SourceLocation DefaultValue="https://addnap.github.io/word-tiles-addin-github/taskpane.html"/>
   </DefaultSettings>
 
+  <!-- Uprawnienia -->
   <Permissions>ReadWriteDocument</Permissions>
 
   <!-- ===== Wstążka / VersionOverrides ===== -->
@@ -41,10 +46,8 @@
     <ov:Hosts>
       <ov:Host xsi:type="ov:Document">
         <ov:DesktopFormFactor>
-          <!-- plik z funkcjami komend -->
           <ov:FunctionFile resid="residCommandsHtml"/>
 
-          <!-- przyciski na wstążce -->
           <ov:ExtensionPoint xsi:type="ov:PrimaryCommandSurface">
             <ov:OfficeTab id="TabHome">
               <ov:Group id="grpTiles">
@@ -96,17 +99,17 @@
     </ov:Hosts>
 
     <ov:Resources>
-      <!-- Ikony dla wstążki (pełne HTTPS) -->
+      <!-- Ikony dla wstążki -->
       <ov:bt:Images>
-        <ov:bt:Image id="icon16" DefaultValue="https://example.com/assets/icon-16.png"/>
-        <ov:bt:Image id="icon32" DefaultValue="https://example.com/assets/icon-32.png"/>
-        <ov:bt:Image id="icon80" DefaultValue="https://example.com/assets/icon-80.png"/>
+        <ov:bt:Image id="icon16" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-16.png"/>
+        <ov:bt:Image id="icon32" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-32.png"/>
+        <ov:bt:Image id="icon80" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-80.png"/>
       </ov:bt:Images>
 
-      <!-- Pliki HTML (pełne HTTPS) -->
+      <!-- Pliki HTML -->
       <ov:bt:Urls>
-        <ov:bt:Url id="residTaskpaneHtml" DefaultValue="https://example.com/taskpane.html"/>
-        <ov:bt:Url id="residCommandsHtml" DefaultValue="https://example.com/commands.html"/>
+        <ov:bt:Url id="residTaskpaneHtml" DefaultValue="https://addnap.github.io/word-tiles-addin-github/taskpane.html"/>
+        <ov:bt:Url id="residCommandsHtml" DefaultValue="https://addnap.github.io/word-tiles-addin-github/commands.html"/>
       </ov:bt:Urls>
 
       <!-- Teksty krótkie -->
