@@ -4,106 +4,141 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
   xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
-  xsi:type="TaskPaneApp">
+  xsi:type="TaskPaneApp"
+  Version="1.0.0.0">
 
+  <!-- ====== PODSTAWY ====== -->
+  <!-- ZMIEŃ NA WŁASNY GUID (np. użyj 'uuidgen') -->
   <Id>7b9e5d2d-2d3c-4a8c-9f0a-2db9a9e0a001</Id>
   <Version>1.0.0.0</Version>
   <ProviderName>AddNap</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
 
-  <DisplayName DefaultValue="Word Tiles" />
-  <Description DefaultValue="Task pane with draggable tiles and placeholders." />
 
-  <IconUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-32.png" />
-  <HighResolutionIconUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-80.png" />
-  <SupportUrl DefaultValue="https://github.com/AddNap/word-tiles-addin-github" />
+  <DisplayName DefaultValue="Word Tiles Add-in"/>
+  <Description DefaultValue="Tiles based on Content Controls with Inspector & validation."/>
 
-  <AppDomains>
-    <AppDomain>https://addnap.github.io</AppDomain>
-    <AppDomain>https://github.com</AppDomain>
-  </AppDomains>
+  <!-- Ikony bazowe (dla starszych hostów) -->
+  <IconUrl DefaultValue="assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="assets/icon-80.png"/>
 
+  <SupportUrl DefaultValue="https://example.com/support"/>
+
+  <!-- Host: Word Document -->
   <Hosts>
-    <Host Name="Document" />
+    <Host Name="Document"/>
   </Hosts>
 
+  <!-- Wymagania API: dopasuj do faktycznie używanych funkcji -->
+  <Requirements>
+    <Sets DefaultMinVersion="1.1">
+      <Set Name="WordApi" MinVersion="1.3"/>
+    </Sets>
+  </Requirements>
+
+  <!-- Ustawienia domyślne: plik panelu -->
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://addnap.github.io/word-tiles-addin-github/taskpane.html" />
+    <SourceLocation DefaultValue="taskpane.html"/>
   </DefaultSettings>
 
+  <!-- Uprawnienia: edycja dokumentu -->
   <Permissions>ReadWriteDocument</Permissions>
 
-  <VersionOverrides xsi:type="VersionOverridesV1_0" xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides">
-    <Hosts>
-      <Host xsi:type="Document">
-        <DesktopFormFactor>
+  <!-- ====== VERSION OVERRIDES ====== -->
+  <VersionOverrides xsi:type="ov:VersionOverrides" Version="1.0">
 
-          <GetStarted>
-            <Title resid="GetStarted.Title" />
-            <Description resid="GetStarted.Description" />
-            <LearnMoreUrl resid="GetStarted.LearnMoreUrl" />
-          </GetStarted>
+    <!-- Definicja komend (wstążka) dla Word -->
+    <ov:Hosts>
+      <ov:Host xsi:type="ov:Document">
+        <ov:DesktopFormFactor>
 
-          <FunctionFile resid="Commands.Url" />
+          <!-- Plik z funkcjami komend (commands.html) -->
+          <ov:FunctionFile resid="residCommandsHtml"/>
 
-          <ExtensionPoint xsi:type="PrimaryCommandSurface">
-            <OfficeTab id="TabHome">
-              <Group id="WordTiles.Group">
-                <Label resid="Group.Label" />
+          <!-- Wstążka: grupa "Tiles" na karcie Home -->
+          <ov:ExtensionPoint xsi:type="ov:PrimaryCommandSurface">
+            <ov:OfficeTab id="TabHome">
+              <ov:Group id="grpTiles" label="Tiles" icon="icon32">
+                <ov:Label resid="residGroupLabel"/>
 
-                <Icon>
-                  <bt:Image size="16" resid="Icon.16x16" />
-                  <bt:Image size="32" resid="Icon.32x32" />
-                  <bt:Image size="80" resid="Icon.80x80" />
-                </Icon>
+                <ov:Icon>
+                  <ov:bt:Image size="16" resid="icon16"/>
+                  <ov:bt:Image size="32" resid="icon32"/>
+                  <ov:bt:Image size="80" resid="icon80"/>
+                </ov:Icon>
 
-                <Control xsi:type="Button" id="TaskpaneButton">
-                  <Label resid="TaskpaneButton.Label" />
-                  <Supertip>
-                    <Title resid="TaskpaneButton.Label" />
-                    <Description resid="TaskpaneButton.Tooltip" />
-                  </Supertip>
-                  <Icon>
-                    <bt:Image size="16" resid="Icon.16x16" />
-                    <bt:Image size="32" resid="Icon.32x32" />
-                    <bt:Image size="80" resid="Icon.80x80" />
-                  </Icon>
-                  <Action xsi:type="ShowTaskpane">
-                    <TaskpaneId>WordTiles.Taskpane</TaskpaneId>
-                    <SourceLocation resid="Taskpane.Url" />
-                  </Action>
-                </Control>
-              </Group>
-            </OfficeTab>
-          </ExtensionPoint>
+                <!-- Przycisk uruchamiający walidator -->
+                <ov:Control xsi:type="ov:Button" id="btnValidate">
+                  <ov:Label resid="residValidateLabel"/>
+                  <ov:Supertip>
+                    <ov:Title resid="residValidateTitle"/>
+                    <ov:Description resid="residValidateDesc"/>
+                  </ov:Supertip>
+                  <ov:Icon>
+                    <ov:bt:Image size="16" resid="icon16"/>
+                    <ov:bt:Image size="32" resid="icon32"/>
+                    <ov:bt:Image size="80" resid="icon80"/>
+                  </ov:Icon>
+                  <ov:Action xsi:type="ov:ExecuteFunction">
+                    <ov:FunctionName>validateTilesCommand</ov:FunctionName>
+                  </ov:Action>
+                </ov:Control>
 
-        </DesktopFormFactor>
-      </Host>
-    </Hosts>
+                <!-- Przycisk otwierający panel (na wypadek, gdyby był zamknięty) -->
+                <ov:Control xsi:type="ov:Button" id="btnShowPane">
+                  <ov:Label resid="residShowPaneLabel"/>
+                  <ov:Supertip>
+                    <ov:Title resid="residShowPaneTitle"/>
+                    <ov:Description resid="residShowPaneDesc"/>
+                  </ov:Supertip>
+                  <ov:Icon>
+                    <ov:bt:Image size="16" resid="icon16"/>
+                    <ov:bt:Image size="32" resid="icon32"/>
+                    <ov:bt:Image size="80" resid="icon80"/>
+                  </ov:Icon>
+                  <ov:Action xsi:type="ov:ShowTaskpane">
+                    <ov:SourceLocation resid="residTaskpaneHtml"/>
+                  </ov:Action>
+                </ov:Control>
 
-    <Resources>
-      <bt:Images>
-        <bt:Image id="Icon.16x16" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-16.png" />
-        <bt:Image id="Icon.32x32" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-32.png" />
-        <bt:Image id="Icon.80x80" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-80.png" />
-      </bt:Images>
+              </ov:Group>
+            </ov:OfficeTab>
+          </ov:ExtensionPoint>
 
-      <bt:Urls>
-        <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://github.com/AddNap/word-tiles-addin-github" />
-        <bt:Url id="Commands.Url" DefaultValue="https://addnap.github.io/word-tiles-addin-github/commands.html" />
-        <bt:Url id="Taskpane.Url" DefaultValue="https://addnap.github.io/word-tiles-addin-github/taskpane.html" />
-      </bt:Urls>
+        </ov:DesktopFormFactor>
+      </ov:Host>
+    </ov:Hosts>
 
-      <bt:ShortStrings>
-        <bt:String id="GetStarted.Title" DefaultValue="Get started with Word Tiles" />
-        <bt:String id="Group.Label" DefaultValue="Word Tiles" />
-        <bt:String id="TaskpaneButton.Label" DefaultValue="Open Tiles" />
-      </bt:ShortStrings>
+    <!-- Zasoby: URL-e, obrazy i stringi wykorzystywane wyżej -->
+    <ov:Resources>
+      <!-- Ikony -->
+      <ov:bt:Images>
+        <ov:bt:Image id="icon16" DefaultValue="assets/icon-16.png"/>
+        <ov:bt:Image id="icon32" DefaultValue="assets/icon-32.png"/>
+        <ov:bt:Image id="icon80" DefaultValue="assets/icon-80.png"/>
+      </ov:bt:Images>
 
-      <bt:LongStrings>
-        <bt:String id="GetStarted.Description" DefaultValue="This add-in shows draggable tiles you can insert into Word." />
-        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Open the Word Tiles task pane" />
-      </bt:LongStrings>
-    </Resources>
+      <!-- Adresy plików HTML -->
+      <ov:bt:Urls>
+        <ov:bt:Url id="residTaskpaneHtml" DefaultValue="taskpane.html"/>
+        <ov:bt:Url id="residCommandsHtml" DefaultValue="commands.html"/>
+      </ov:bt:Urls>
+
+      <!-- Etykiety krótkie -->
+      <ov:bt:ShortStrings>
+        <ov:bt:String id="residGroupLabel" DefaultValue="Tiles"/>
+        <ov:bt:String id="residValidateLabel" DefaultValue="Tiles Inspector"/>
+        <ov:bt:String id="residValidateTitle" DefaultValue="Validate tiles in the document"/>
+        <ov:bt:String id="residShowPaneLabel" DefaultValue="Open Tiles Pane"/>
+        <ov:bt:String id="residShowPaneTitle" DefaultValue="Show the Tiles task pane"/>
+      </ov:bt:ShortStrings>
+
+      <!-- Opisy dłuższe (supertipy) -->
+      <ov:bt:LongStrings>
+        <ov:bt:String id="residValidateDesc" DefaultValue="Run validation to detect duplicate names, missing required fields, and unmatched START/END condition anchors."/>
+        <ov:bt:String id="residShowPaneDesc" DefaultValue="Open the Tiles task pane with buttons to insert Text, Table, Image, and Condition tiles."/>
+      </ov:bt:LongStrings>
+    </ov:Resources>
+
   </VersionOverrides>
 </OfficeApp>
