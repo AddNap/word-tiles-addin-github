@@ -6,7 +6,8 @@
   xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
   xsi:type="TaskPaneApp">
 
-  <Id>7b9e5d2d-2d3c-4a8c-9f0a-2db9a9e0a001</Id>  
+  <!-- Własny GUID -->
+  <Id>aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee</Id>
   <Version>1.0.0.0</Version>
   <ProviderName>AddNap</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
@@ -14,12 +15,14 @@
   <DisplayName DefaultValue="Word Tiles Add-in"/>
   <Description DefaultValue="Tiles based on Content Controls with Inspector &amp; validation."/>
 
-  <!-- Ikony hostowane na GitHub Pages -->
-  <IconUrl DefaultValue="assets/icon-32.png"/>
-  <HighResolutionIconUrl DefaultValue="assets/icon-80.png"/>
+  <!-- Ikony: HTTPS, brak redirectów, poprawne wymiary -->
+  <IconUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-128.png"/>
 
+  <!-- Support URL (HTTPS) -->
+  <SupportUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/support.html"/>
 
-  <!-- Host: Word -->
+  <!-- Host Word -->
   <Hosts>
     <Host Name="Document"/>
   </Hosts>
@@ -31,19 +34,19 @@
     </Sets>
   </Requirements>
 
-  <!-- Domyślna lokalizacja panelu -->
+  <!-- Task pane (musi zwracać 200 OK) -->
   <DefaultSettings>
-    <SourceLocation DefaultValue="taskpane.html"/>
+    <SourceLocation DefaultValue="https://addnap.github.io/word-tiles-addin-github/taskpane.html"/>
   </DefaultSettings>
 
-  <!-- Uprawnienia -->
   <Permissions>ReadWriteDocument</Permissions>
 
-  <!-- ===== Wstążka / VersionOverrides ===== -->
+  <!-- Wstążka / komendy -->
   <VersionOverrides xsi:type="ov:VersionOverridesV1_0" Version="1.0">
     <ov:Hosts>
       <ov:Host xsi:type="ov:Document">
         <ov:DesktopFormFactor>
+          <!-- Plik komend (też 200 OK) -->
           <ov:FunctionFile resid="residCommandsHtml"/>
 
           <ov:ExtensionPoint xsi:type="ov:PrimaryCommandSurface">
@@ -56,7 +59,6 @@
                   <ov:bt:Image size="80" resid="icon80"/>
                 </ov:Icon>
 
-                <!-- Walidator -->
                 <ov:Control xsi:type="ov:Button" id="btnValidate">
                   <ov:Label resid="residValidateLabel"/>
                   <ov:Supertip>
@@ -73,7 +75,6 @@
                   </ov:Action>
                 </ov:Control>
 
-                <!-- Otwórz panel -->
                 <ov:Control xsi:type="ov:Button" id="btnShowPane">
                   <ov:Label resid="residShowPaneLabel"/>
                   <ov:Supertip>
@@ -97,20 +98,18 @@
     </ov:Hosts>
 
     <ov:Resources>
-      <!-- Ikony dla wstążki -->
+      <!-- Ikony dla wstążki (mogą być te same) -->
       <ov:bt:Images>
-        <ov:bt:Image id="icon16" DefaultValue="assets/icon-16.png"/>
-        <ov:bt:Image id="icon32" DefaultValue="assets/icon-32.png"/>
-        <ov:bt:Image id="icon80" DefaultValue="icon-80.png"/>
+        <ov:bt:Image id="icon16" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-32.png"/>
+        <ov:bt:Image id="icon32" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-32.png"/>
+        <ov:bt:Image id="icon80" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-128.png"/>
       </ov:bt:Images>
 
-      <!-- Pliki HTML -->
       <ov:bt:Urls>
-        <ov:bt:Url id="residTaskpaneHtml" DefaultValue="taskpane.html"/>
-        <ov:bt:Url id="residCommandsHtml" DefaultValue="commands.html"/>
+        <ov:bt:Url id="residTaskpaneHtml" DefaultValue="https://addnap.github.io/word-tiles-addin-github/taskpane.html"/>
+        <ov:bt:Url id="residCommandsHtml" DefaultValue="https://addnap.github.io/word-tiles-addin-github/commands.html"/>
       </ov:bt:Urls>
 
-      <!-- Teksty krótkie -->
       <ov:bt:ShortStrings>
         <ov:bt:String id="residGroupLabel" DefaultValue="Tiles"/>
         <ov:bt:String id="residValidateLabel" DefaultValue="Tiles Inspector"/>
@@ -119,7 +118,6 @@
         <ov:bt:String id="residShowPaneTitle" DefaultValue="Show the Tiles task pane"/>
       </ov:bt:ShortStrings>
 
-      <!-- Teksty długie -->
       <ov:bt:LongStrings>
         <ov:bt:String id="residValidateDesc" DefaultValue="Run validation to detect duplicate names, missing required fields, and unmatched START/END condition anchors."/>
         <ov:bt:String id="residShowPaneDesc" DefaultValue="Open the Tiles task pane with buttons to insert Text, Table, Image, and Condition tiles."/>
