@@ -1,12 +1,26 @@
 <!doctype html>
-<html lang="pl">
+<html>
 <head>
-  <meta charset="utf-8"/>
-  <title>Taskpane – Word Tiles</title>
+  <meta charset="utf-8" />
+  <title>Word Tiles</title>
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' https: data: blob: 'unsafe-inline' 'unsafe-eval';">
+  <link rel="stylesheet" href="./styles.css">
   <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
 </head>
 <body>
-  <h1>Word Tiles Add-in</h1>
-  <p>To jest panel boczny hostowany na <strong>GitHub Pages</strong>.</p>
+  <header>
+    <h3>Word Tiles</h3>
+  </header>
+
+  <!-- Slot na „upuść, aby wstawić” -->
+  <div id="drop-slot" class="drop-slot" aria-label="Drop here to insert">
+    Upuść kafel tutaj, aby wstawić w bieżące miejsce kursora w Wordzie
+  </div>
+
+  <!-- Lista kafli -->
+  <section id="tiles" class="tiles"></section>
+
+  <script src="./scripts/taskpane.js" type="module"></script>
 </body>
 </html>
