@@ -1,7 +1,0 @@
-html, body { font-family: system-ui, Segoe UI, Roboto, Arial, sans-serif; margin: 0; padding: 0; }
-.wrap { padding: 14px; }
-.row { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; }
-input#tileName { flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 6px; }
-button { padding: 8px 12px; border: 0; border-radius: 6px; cursor: pointer; background: #2563eb; color: white; font-weight: 600; }
-button:hover { filter: brightness(0.95); }
-.hint { color: #666; font-size: 12px; }
