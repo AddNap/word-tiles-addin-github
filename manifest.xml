@@ -19,6 +19,13 @@
     <Host Name="Document"/>
   </Hosts>
 
+  <!-- DODANE: Requirements -->
+  <Requirements>
+    <Sets>
+      <Set Name="WordApi" MinVersion="1.3"/>
+    </Sets>
+  </Requirements>
+
   <DefaultSettings>
     <SourceLocation DefaultValue="https://addnap.github.io/word-tiles-addin-github/taskpane.html"/>
   </DefaultSettings>
@@ -30,7 +37,7 @@
     <Hosts>
       <Host xsi:type="Document">
         <DesktopFormFactor>
-          <FunctionFile resid="Commands.Url"/>
+          <!-- USUNIĘTO: FunctionFile, bo nie ma ExecuteFunction -->
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
             <CustomTab id="Tiles.Tab">
               <Group id="Tiles.Group">
@@ -67,7 +74,6 @@
       </bt:Images>
 
       <bt:Urls>
-        <bt:Url id="Commands.Url" DefaultValue="https://addnap.github.io/word-tiles-addin-github/commands.html"/>
         <bt:Url id="Taskpane.Url" DefaultValue="https://addnap.github.io/word-tiles-addin-github/taskpane.html"/>
         <bt:Url id="List.Url" DefaultValue="https://addnap.github.io/word-tiles-addin-github/list.html"/>
       </bt:Urls>
