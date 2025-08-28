@@ -34,36 +34,6 @@ const TILE_DEFS = [
   }
 ]
 
-// ====== THEME BRIDGE: Office theme -> CSS variables ======
-function applyThemeVarsFromOffice(theme) {
-  // theme { bodyBackgroundColor, bodyForegroundColor, controlBackgroundColor, controlForegroundColor, hyperlinkColor, hyperlinkVisitedColor }
-  const r = document.documentElement.style
-  if (!theme) return
-
-  // Użyj kolorów Office jako bazowych, ale podbij kontrast dla akcentu
-  r.setProperty('--bg', theme.bodyBackgroundColor || getComputedStyle(document.documentElement).getPropertyValue('--bg'))
-  r.setProperty('--fg', theme.bodyForegroundColor || getComputedStyle(document.documentElement).getPropertyValue('--fg'))
-  r.setProperty('--card', theme.controlBackgroundColor || getComputedStyle(document.documentElement).getPropertyValue('--card'))
-  r.setProperty('--border', 'color-mix(in srgb, var(--fg), var(--bg) 85%)')
-  r.setProperty('--accent', theme.hyperlinkColor || getComputedStyle(document.documentElement).getPropertyValue('--accent'))
-  r.setProperty('--accent-contrast', '#ffffff')
-}
-
-function initThemeBridge() {
-  try {
-    // Zastosuj na starcie
-    if (Office && Office.context && Office.context.officeTheme) {
-      applyThemeVarsFromOffice(Office.context.officeTheme)
-    }
-    // Reaguj na zmiany w locie
-    if (Office && typeof Office.onOfficeThemeChanged === 'function') {
-      Office.onOfficeThemeChanged((args) => applyThemeVarsFromOffice(args))
-    }
-  } catch (_) {
-    // cicho ignorujemy jeśli środowisko nie wspiera (np. web preview)
-  }
-}
-
 
 // ====== Word helpers ======
 function setHtmlToSelection(html) {
