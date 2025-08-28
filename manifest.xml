@@ -1,86 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
-           xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
-           xsi:type="TaskPaneApp">
+<OfficeApp
+  xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+  xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
+  xsi:type="TaskPaneApp">
 
+  <!-- Podstawowe metadane -->
   <Id>7b9e5d2d-2d3c-4a8c-9f0a-2db9a9e0a001</Id>
   <Version>1.0.0.0</Version>
   <ProviderName>AddNap</ProviderName>
-  <DefaultLocale>pl-PL</DefaultLocale>
-  <DisplayName DefaultValue="Word Tiles Add-in"/>
-  <Description DefaultValue="Testowy dodatek Word z kaflami/placeholderami {nazwa}"/>
+  <DefaultLocale>en-US</DefaultLocale>
 
-  <IconUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-32.png"/>
-  <HighResolutionIconUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-80.png"/>
-  <SupportUrl DefaultValue="https://github.com/AddNap/word-tiles-addin-github"/>
+  <DisplayName DefaultValue="Word Tiles" />
+  <Description DefaultValue="Simple Word task pane add-in with tiles." />
 
-  <Hosts><Host Name="Document"/></Hosts>
+  <!-- Ikony i wsparcie -->
+  <IconUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-32.png" />
+  <HighResolutionIconUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-80.png" />
+  <SupportUrl DefaultValue="https://github.com/AddNap/word-tiles-addin-github" />
 
-  <Requirements>
-    <Sets>
-      <Set Name="WordApi" MinVersion="1.3"/>
-    </Sets>
-  </Requirements>
+  <!-- (opcjonalnie) domeny, z których będzie ładowana zawartość -->
+  <AppDomains>
+    <AppDomain>https://addnap.github.io</AppDomain>
+    <AppDomain>https://github.com</AppDomain>
+  </AppDomains>
+
+  <!-- Host i domyślny task pane -->
+  <Hosts>
+    <Host Name="Document" />
+  </Hosts>
 
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://addnap.github.io/word-tiles-addin-github/taskpane.html"/>
+    <SourceLocation DefaultValue="https://addnap.github.io/word-tiles-addin-github/taskpane.html" />
   </DefaultSettings>
 
   <Permissions>ReadWriteDocument</Permissions>
 
-  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+  <!-- Komendy wstążki i zasoby -->
+  <VersionOverrides xsi:type="VersionOverridesV1_0" xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides">
     <Hosts>
       <Host xsi:type="Document">
         <DesktopFormFactor>
+
+          <!-- Sekcja GetStarted (opcjonalna, ale poprawna) -->
+          <GetStarted>
+            <Title resid="GetStarted.Title" />
+            <Description resid="GetStarted.Description" />
+            <LearnMoreUrl resid="GetStarted.LearnMoreUrl" />
+          </GetStarted>
+
+          <!-- Plik funkcji dla komend -->
+          <FunctionFile resid="Commands.Url" />
+
+          <!-- Komendy na wstążce -->
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
-            <CustomTab id="Tiles.Tab">
-              <Group id="Tiles.Group">
-                <Label resid="Tiles.Group.Label"/>
-                <Control xsi:type="Button" id="Tiles.Open">
-                  <Label resid="Tiles.Open.Label"/>
+            <OfficeTab id="TabHome">
+              <Group id="WordTiles.Group">
+                <Label resid="Group.Label" />
+
+                <!-- UWAGA: Ikona grupy MUSI być przed Control -->
+                <Icon>
+                  <bt:Image size="16" resid="Icon.16x16" />
+                  <bt:Image size="32" resid="Icon.32x32" />
+                  <bt:Image size="80" resid="Icon.80x80" />
+                </Icon>
+
+                <Control xsi:type="Button" id="TaskpaneButton">
+                  <Label resid="TaskpaneButton.Label" />
                   <Supertip>
-                    <Title resid="Tiles.Open.Label"/>
-                    <Description resid="Tiles.Open.Desc"/>
+                    <Title resid="TaskpaneButton.Label" />
+                    <Description resid="TaskpaneButton.Tooltip" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="Icon16"/>
-                    <bt:Image size="32" resid="Icon32"/>
-                    <bt:Image size="80" resid="Icon80"/>
+                    <bt:Image size="16" resid="Icon.16x16" />
+                    <bt:Image size="32" resid="Icon.32x32" />
+                    <bt:Image size="80" resid="Icon.80x80" />
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
-                    <TaskpaneId>TilesPane</TaskpaneId>
-                    <SourceLocation resid="Taskpane.Url"/>
+                    <TaskpaneId>WordTiles.Taskpane</TaskpaneId>
+                    <SourceLocation resid="Taskpane.Url" />
                   </Action>
                 </Control>
               </Group>
-              <Label resid="Tiles.Tab.Label"/>
-            </CustomTab>
+            </OfficeTab>
           </ExtensionPoint>
+
         </DesktopFormFactor>
       </Host>
     </Hosts>
 
+    <!-- Zasoby: obrazy, URL-e i teksty -->
     <Resources>
       <bt:Images>
-        <bt:Image id="Icon16" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-16.png"/>
-        <bt:Image id="Icon32" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-32.png"/>
-        <bt:Image id="Icon80" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-80.png"/>
+        <bt:Image id="Icon.16x16" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-16.png" />
+        <bt:Image id="Icon.32x32" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-32.png" />
+        <bt:Image id="Icon.80x80" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-80.png" />
       </bt:Images>
 
       <bt:Urls>
-        <bt:Url id="Taskpane.Url" DefaultValue="https://addnap.github.io/word-tiles-addin-github/taskpane.html"/>
+        <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://github.com/AddNap/word-tiles-addin-github" />
+        <bt:Url id="Commands.Url" DefaultValue="https://addnap.github.io/word-tiles-addin-github/commands.html" />
+        <bt:Url id="Taskpane.Url" DefaultValue="https://addnap.github.io/word-tiles-addin-github/taskpane.html" />
       </bt:Urls>
 
       <bt:ShortStrings>
-        <bt:String id="Tiles.Tab.Label" DefaultValue="Tiles"/>
-        <bt:String id="Tiles.Group.Label" DefaultValue="Kafle"/>
-        <bt:String id="Tiles.Open.Label" DefaultValue="Otwórz panel"/>
+        <bt:String id="GetStarted.Title" DefaultValue="Get started with Word Tiles" />
+        <bt:String id="Group.Label" DefaultValue="Word Tiles" />
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Open Tiles" />
       </bt:ShortStrings>
 
       <bt:LongStrings>
-        <bt:String id="Tiles.Open.Desc" DefaultValue="Pokazuje panel kafli z GitHub Pages."/>
+        <bt:String id="GetStarted.Description" DefaultValue="This add-in opens a tiles task pane in Word." />
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Show the Word Tiles task pane" />
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
