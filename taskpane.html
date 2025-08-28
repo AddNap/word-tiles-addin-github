@@ -7,19 +7,57 @@
         content="default-src 'self' https: data: blob: 'unsafe-inline' 'unsafe-eval';">
   <link rel="stylesheet" href="./styles.css">
   <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+  <style>
+    .section { margin-bottom: 12px; }
+    .row { display:flex; gap:8px; align-items:center; flex-wrap: wrap; }
+    .list { border:1px solid #ddd; border-radius:8px; padding:8px; max-height:180px; overflow:auto; }
+    .badge { font-size:11px; padding:2px 6px; border:1px solid #ccc; border-radius:999px; }
+    .btn { padding:6px 10px; border:1px solid #ccc; border-radius:6px; background:#fff; cursor:pointer; }
+    .btn.primary { border-color:#0b57d0; }
+    .input { padding:6px 8px; border:1px solid #ccc; border-radius:6px; }
+    .placeholder-item { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px dashed #eee; }
+    .placeholder-item:last-child { border-bottom:0; }
+  </style>
 </head>
 <body>
-  <header>
-    <h3>Word Tiles</h3>
-  </header>
+  <header><h3>Word Tiles</h3></header>
 
-  <!-- Slot na „upuść, aby wstawić” -->
+  <!-- PLACEHOLDERS -->
+  <section class="section">
+    <div class="row">
+      <strong>Placeholdery w dokumencie</strong>
+      <button id="refreshPlaceholders" class="btn">Odśwież</button>
+    </div>
+
+    <div id="placeholdersList" class="list" aria-live="polite"></div>
+
+    <details class="section">
+      <summary><strong>Dodaj placeholder</strong></summary>
+      <div class="row" style="margin-top:8px">
+        <input id="phName" class="input" placeholder="nazwa (np. customer_name)" />
+        <select id="phType" class="input">
+          <option value="text">text</option>
+          <option value="block-start">block-start</option>
+          <option value="block-end">block-end</option>
+        </select>
+        <button id="addPlaceholder" class="btn primary">Dodaj</button>
+      </div>
+      <div style="font-size:12px;opacity:.7;margin-top:6px">
+        Wstawia kontrolkę w miejscu kursora: <code>{{ name }}</code>, <code>{{# name }}</code> lub <code>{{/ name }}</code>
+      </div>
+    </details>
+  </section>
+
+  <!-- DROP-SLOT do wstawiania kafli -->
   <div id="drop-slot" class="drop-slot" aria-label="Drop here to insert">
     Upuść kafel tutaj, aby wstawić w bieżące miejsce kursora w Wordzie
   </div>
 
-  <!-- Lista kafli -->
-  <section id="tiles" class="tiles"></section>
+  <!-- KAFLE -->
+  <section class="section">
+    <strong>Kafle</strong>
+    <div id="tiles" class="tiles"></div>
+  </section>
 
   <script src="./scripts/taskpane.js" type="module"></script>
 </body>
