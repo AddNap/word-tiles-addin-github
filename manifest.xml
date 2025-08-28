@@ -8,12 +8,10 @@
   Version="1.0.0.0">
 
   <!-- ====== BASICS ====== -->
-  <!-- ZMIEŃ NA WŁASNY GUID -->
   <Id>7b9e5d2d-2d3c-4a8c-9f0a-2db9a9e0a001</Id>
   <Version>1.0.0.0</Version>
   <ProviderName>AddNap</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-
 
   <DisplayName DefaultValue="Word Tiles Add-in"/>
   <Description DefaultValue="Tiles based on Content Controls with Inspector &amp; validation."/>
@@ -45,7 +43,7 @@
   <Permissions>ReadWriteDocument</Permissions>
 
   <!-- ====== VERSION OVERRIDES ====== -->
-  <VersionOverrides xsi:type="ov:VersionOverrides" Version="1.0">
+  <VersionOverrides xsi:type="ov:VersionOverridesV1_0" Version="1.0">
 
     <!-- Definicja komend (wstążka) dla Word -->
     <ov:Hosts>
@@ -58,7 +56,7 @@
           <!-- Wstążka: grupa "Tiles" na karcie Home -->
           <ov:ExtensionPoint xsi:type="ov:PrimaryCommandSurface">
             <ov:OfficeTab id="TabHome">
-              <ov:Group id="grpTiles" label="Tiles" icon="icon32">
+              <ov:Group id="grpTiles">
                 <ov:Label resid="residGroupLabel"/>
 
                 <ov:Icon>
