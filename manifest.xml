@@ -2,13 +2,9 @@
 <OfficeApp
   xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
-  xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
-  xsi:type="TaskPaneApp"
-  Version="1.0.0.0"
-  xsi:schemaLocation="http://schemas.microsoft.com/office/appforoffice/1.1 https://appsforoffice.microsoft.com/lib/1/hosted/officeappbasictypes-1.0.xsd">
+  xsi:type="TaskPaneApp">
 
-  <Id>7b9e5d2d-2d3c-4a8c-9f0a-2db9a9e0a001</Id>
+  <Id>7b9e5d2d-2d3c-4a8c-9f0a-2db9a9e0a001</Id>  
   <Version>1.0.0.0</Version>
   <ProviderName>AddNap</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
@@ -16,114 +12,29 @@
   <DisplayName DefaultValue="Word Tiles Add-in"/>
   <Description DefaultValue="Tiles based on Content Controls with Inspector &amp; validation."/>
 
-  <IconUrl DefaultValue="assets/icon-32.png"/>
-  <HighResolutionIconUrl DefaultValue="assets/icon-80.png"/>
+  <!-- Ikony bazowe (pełne HTTPS) -->
+  <IconUrl DefaultValue="https://example.com/assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://example.com/assets/icon-80.png"/>
 
   <SupportUrl DefaultValue="https://example.com/support"/>
 
+  <!-- Host: Word -->
   <Hosts>
     <Host Name="Document"/>
   </Hosts>
 
+  <!-- Wymagania API -->
   <Requirements>
     <Sets DefaultMinVersion="1.1">
       <Set Name="WordApi" MinVersion="1.3"/>
     </Sets>
   </Requirements>
 
+  <!-- Domyślna lokalizacja panelu -->
   <DefaultSettings>
-    <SourceLocation DefaultValue="taskpane.html"/>
+    <SourceLocation DefaultValue="https://example.com/taskpane.html"/>
   </DefaultSettings>
 
+  <!-- Uprawnienia -->
   <Permissions>ReadWriteDocument</Permissions>
-
-  <!-- ===== VersionOverrides: komendy/wstążka ===== -->
-  <VersionOverrides xsi:type="ov:VersionOverridesV1_0" Version="1.0">
-    <ov:Hosts>
-      <ov:Host xsi:type="ov:Document">
-        <ov:DesktopFormFactor>
-          <!-- plik z funkcjami komend -->
-          <ov:FunctionFile resid="residCommandsHtml"/>
-
-          <!-- przyciski na wstążce -->
-          <ov:ExtensionPoint xsi:type="ov:PrimaryCommandSurface">
-            <ov:OfficeTab id="TabHome">
-              <ov:Group id="grpTiles">
-                <ov:Label resid="residGroupLabel"/>
-                <ov:Icon>
-                  <ov:bt:Image size="16" resid="icon16"/>
-                  <ov:bt:Image size="32" resid="icon32"/>
-                  <ov:bt:Image size="80" resid="icon80"/>
-                </ov:Icon>
-
-                <!-- Walidator -->
-                <ov:Control xsi:type="ov:Button" id="btnValidate">
-                  <ov:Label resid="residValidateLabel"/>
-                  <ov:Supertip>
-                    <ov:Title resid="residValidateTitle"/>
-                    <ov:Description resid="residValidateDesc"/>
-                  </ov:Supertip>
-                  <ov:Icon>
-                    <ov:bt:Image size="16" resid="icon16"/>
-                    <ov:bt:Image size="32" resid="icon32"/>
-                    <ov:bt:Image size="80" resid="icon80"/>
-                  </ov:Icon>
-                  <ov:Action xsi:type="ov:ExecuteFunction">
-                    <ov:FunctionName>validateTilesCommand</ov:FunctionName>
-                  </ov:Action>
-                </ov:Control>
-
-                <!-- Otwórz panel -->
-                <ov:Control xsi:type="ov:Button" id="btnShowPane">
-                  <ov:Label resid="residShowPaneLabel"/>
-                  <ov:Supertip>
-                    <ov:Title resid="residShowPaneTitle"/>
-                    <ov:Description resid="residShowPaneDesc"/>
-                  </ov:Supertip>
-                  <ov:Icon>
-                    <ov:bt:Image size="16" resid="icon16"/>
-                    <ov:bt:Image size="32" resid="icon32"/>
-                    <ov:bt:Image size="80" resid="icon80"/>
-                  </ov:Icon>
-                  <ov:Action xsi:type="ov:ShowTaskpane">
-                    <ov:SourceLocation resid="residTaskpaneHtml"/>
-                  </ov:Action>
-                </ov:Control>
-              </ov:Group>
-            </ov:OfficeTab>
-          </ov:ExtensionPoint>
-        </ov:DesktopFormFactor>
-      </ov:Host>
-    </ov:Hosts>
-
-    <ov:Resources>
-      <!-- Ikony dla wstążki -->
-      <ov:bt:Images>
-        <ov:bt:Image id="icon16" DefaultValue="assets/icon-16.png"/>
-        <ov:bt:Image id="icon32" DefaultValue="assets/icon-32.png"/>
-        <ov:bt:Image id="icon80" DefaultValue="assets/icon-80.png"/>
-      </ov:bt:Images>
-
-      <!-- Pliki HTML -->
-      <ov:bt:Urls>
-        <ov:bt:Url id="residTaskpaneHtml" DefaultValue="taskpane.html"/>
-        <ov:bt:Url id="residCommandsHtml" DefaultValue="commands.html"/>
-      </ov:bt:Urls>
-
-      <!-- Teksty krótkie -->
-      <ov:bt:ShortStrings>
-        <ov:bt:String id="residGroupLabel" DefaultValue="Tiles"/>
-        <ov:bt:String id="residValidateLabel" DefaultValue="Tiles Inspector"/>
-        <ov:bt:String id="residValidateTitle" DefaultValue="Validate tiles in the document"/>
-        <ov:bt:String id="residShowPaneLabel" DefaultValue="Open Tiles Pane"/>
-        <ov:bt:String id="residShowPaneTitle" DefaultValue="Show the Tiles task pane"/>
-      </ov:bt:ShortStrings>
-
-      <!-- Teksty długie -->
-      <ov:bt:LongStrings>
-        <ov:bt:String id="residValidateDesc" DefaultValue="Run validation to detect duplicate names, missing required fields, and unmatched START/END condition anchors."/>
-        <ov:bt:String id="residShowPaneDesc" DefaultValue="Open the Tiles task pane with buttons to insert Text, Table, Image, and Condition tiles."/>
-      </ov:bt:LongStrings>
-    </ov:Resources>
-  </VersionOverrides>
 </OfficeApp>
