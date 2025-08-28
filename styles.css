@@ -1,25 +1,169 @@
-:root { font-family: system-ui, sans-serif; }
-body { margin: 0; padding: 12px; }
-header { margin-bottom: 8px; }
-h3 { margin: 0 0 8px; }
+/* Używamy zmiennych, żeby łatwo spiąć się z motywem Office */
+:root {
+  --bg: #0b0b0c;
+  --fg: #e9e9ec;
+  --muted: #a9a9b3;
+  --card: #151518;
+  --border: #2a2a31;
+  --accent: #4c8dff;
+  --accent-contrast: #ffffff;
+  --shadow: 0 6px 20px rgba(0,0,0,.25);
 
-.drop-slot {
-  border: 1.5px dashed #b8b8b8;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 12px;
-  font-size: 12px;
-  color: #444;
+  color-scheme: light dark;
+  font-synthesis-weight: none;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
-.drop-slot.dragover { background: rgba(0,0,0,.03); }
 
-.tiles { display: grid; gap: 8px; }
+/* Domyślnie dopasuj do systemowego motywu użytkownika */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f6f7f9;
+    --fg: #1f2328;
+    --muted: #5b646e;
+    --card: #ffffff;
+    --border: #e5e7eb;
+    --accent: #2563eb;
+    --accent-contrast: #ffffff;
+    --shadow: 0 8px 24px rgba(0,0,0,.08);
+  }
+}
 
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  padding: 16px 14px 18px;
+  color: var(--fg);
+  background: var(--bg);
+}
+
+/* Typografia */
+h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+  letter-spacing: .2px;
+}
+
+/* Layout sekcji */
+.section {
+  margin-bottom: 14px;
+  padding: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+/* Przycisk */
+.btn {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--card), #000 3%) 0%, var(--card) 100%);
+  color: var(--fg);
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: transform .04s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease;
+}
+.btn:hover { border-color: color-mix(in srgb, var(--border), var(--fg) 20%); }
+.btn:active { transform: translateY(1px); }
+.btn.primary {
+  border-color: color-mix(in srgb, var(--accent), #000 35%);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent), #fff 12%) 0%, var(--accent) 100%);
+  color: var(--accent-contrast);
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--accent), transparent 75%);
+}
+.btn.primary:hover {
+  box-shadow: 0 8px 26px color-mix(in srgb, var(--accent), transparent 70%);
+}
+
+/* Wejścia */
+.input, select.input {
+  width: min(260px, 100%);
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--fg);
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.input:focus, .input:focus-visible, select.input:focus {
+  border-color: color-mix(in srgb, var(--accent), #000 30%);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent), transparent 80%);
+}
+
+/* Odznaki, code */
+.badge {
+  font-size: 11px; padding: 2px 8px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--card), var(--fg) 6%);
+  border-radius: 999px; color: var(--muted);
+}
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--card), var(--fg) 6%);
+  border: 1px solid var(--border);
+  color: var(--fg);
+}
+
+/* Lista placeholderów */
+.list {
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--card), var(--fg) 3%);
+  padding: 8px;
+  max-height: 200px;
+  overflow: auto;
+}
+.placeholder-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 4px;
+  border-bottom: 1px dashed color-mix(in srgb, var(--border), var(--fg) 6%);
+}
+.placeholder-item:last-child { border-bottom: 0; }
+
+/* Drop-slot */
+.drop-slot {
+  margin: 12px 0;
+  border: 2px dashed color-mix(in srgb, var(--accent), var(--fg) 30%);
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  background: color-mix(in srgb, var(--card), var(--accent) 5%);
+  color: color-mix(in srgb, var(--fg), var(--accent) 15%);
+  transition: background .2s ease, border-color .2s ease;
+}
+.drop-slot.dragover {
+  background: color-mix(in srgb, var(--card), var(--accent) 9%);
+  border-color: var(--accent);
+}
+
+/* Kafle */
+.tiles { display: grid; gap: 10px; }
 .tile {
-  border: 1px solid #ddd; border-radius: 10px;
-  padding: 12px; background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  padding: 12px;
+  box-shadow: var(--shadow);
+  transition: transform .06s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
   cursor: grab;
 }
-.tile:active { cursor: grabbing; }
-.tile-title { font-weight: 600; margin-bottom: 6px; }
-.tile-footer { font-size: 12px; opacity: .6; margin-top: 8px; }
+.tile:hover {
+  border-color: color-mix(in srgb, var(--border), var(--fg) 25%);
+  box-shadow: 0 10px 30px rgba(0,0,0,.18);
+}
+.tile:active { cursor: grabbing; transform: translateY(1px); }
+.tile-title { font-weight: 650; margin-bottom: 8px; }
+
+/* Preferencje ruchu */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
