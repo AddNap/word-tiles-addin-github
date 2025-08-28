@@ -1,91 +1,63 @@
-/* Używamy zmiennych, żeby łatwo spiąć się z motywem Office */
-:root {
-  --bg: #0b0b0c;
-  --fg: #e9e9ec;
-  --muted: #a9a9b3;
-  --card: #151518;
-  --border: #2a2a31;
-  --accent: #4c8dff;
-  --accent-contrast: #ffffff;
-  --shadow: 0 6px 20px rgba(0,0,0,.25);
+/* === Stała skórka dodatku (dark) – ignorujemy motyw użytkownika === */
 
-  color-scheme: light dark;
-  font-synthesis-weight: none;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-}
-
-/* Domyślnie dopasuj do systemowego motywu użytkownika */
-@media (prefers-color-scheme: light) {
-  :root {
-    --bg: #f6f7f9;
-    --fg: #1f2328;
-    --muted: #5b646e;
-    --card: #ffffff;
-    --border: #e5e7eb;
-    --accent: #2563eb;
-    --accent-contrast: #ffffff;
-    --shadow: 0 8px 24px rgba(0,0,0,.08);
-  }
-}
-
+/* Reset/normalizacja (ważne w WebView Worda) */
 * { box-sizing: border-box; }
 html, body { height: 100%; }
+button, input, select, textarea { font: inherit; }
+button { all: unset; cursor: pointer; }
+
+/* SZTYWNE KOLORY – nic nie dziedziczymy z systemu/Office */
+:root {
+  --bg: #0f1115;
+  --fg: #e6e8ee;
+  --muted: #a3a8b3;
+  --card: #171a20;
+  --border: #2a2f3a;
+  --accent: #4c8dff;
+  --accent-contrast: #ffffff;
+  --shadow: 0 8px 28px rgba(0, 0, 0, .25);
+}
+
 body {
   margin: 0;
-  padding: 16px 14px 18px;
+  padding: 14px;
   color: var(--fg);
   background: var(--bg);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  line-height: 1.28;
 }
 
-/* Typografia */
-h3 {
-  margin: 0 0 10px;
-  font-size: 16px;
-  letter-spacing: .2px;
-}
+/* Nagłówek */
+h3 { margin: 0 0 10px; font-size: 16px; letter-spacing: .2px; }
 
-/* Layout sekcji */
+/* Karty/sekcje */
 .section {
-  background: color-mix(in srgb, var(--bg), #fff 5%); /* ciemny półton */
+  margin-bottom: 14px;
+  padding: 12px;
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 12px;
-  margin-bottom: 14px;
+  box-shadow: var(--shadow);
 }
-
-
 .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 
 /* Przycisk */
-button {
-  all: unset;
-  font: inherit;
-  cursor: pointer;
-}
 .btn {
   display: inline-block;
-  padding: 6px 12px;
-  border-radius: 8px;
-  border: 1px solid var(--accent);
-  background: var(--accent);
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--accent), #000 35%);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent), #fff 12%) 0%, var(--accent) 100%);
   color: var(--accent-contrast);
   font-size: 12px;
   font-weight: 600;
+  transition: filter .15s ease, transform .06s ease, box-shadow .2s ease;
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--accent), transparent 75%);
 }
-.btn:hover { filter: brightness(1.1); }
-
+.btn:hover { filter: brightness(1.08); }
 .btn:active { transform: translateY(1px); }
-.btn.primary {
-  border-color: color-mix(in srgb, var(--accent), #000 35%);
-  background: linear-gradient(180deg, color-mix(in srgb, var(--accent), #fff 12%) 0%, var(--accent) 100%);
-  color: var(--accent-contrast);
-  box-shadow: 0 6px 20px color-mix(in srgb, var(--accent), transparent 75%);
-}
-.btn.primary:hover {
-  box-shadow: 0 8px 26px color-mix(in srgb, var(--accent), transparent 70%);
-}
 
-/* Wejścia */
+/* Pola */
 .input, select.input {
   width: min(260px, 100%);
   padding: 8px 10px;
@@ -94,14 +66,13 @@ button {
   background: var(--card);
   color: var(--fg);
   outline: none;
-  transition: border-color .2s ease, box-shadow .2s ease;
 }
-.input:focus, .input:focus-visible, select.input:focus {
+.input:focus, select.input:focus {
   border-color: color-mix(in srgb, var(--accent), #000 30%);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent), transparent 80%);
 }
 
-/* Odznaki, code */
+/* Odznaki i code */
 .badge {
   font-size: 11px; padding: 2px 8px;
   border: 1px solid var(--border);
@@ -136,37 +107,32 @@ code {
 
 /* Drop-slot */
 .drop-slot {
+  margin: 12px 0;
   border: 2px dashed var(--accent);
   border-radius: 14px;
   padding: 14px;
-  background: color-mix(in srgb, var(--accent), transparent 90%);
-  font-size: 13px;
   text-align: center;
+  background: color-mix(in srgb, var(--accent), transparent 90%);
+  color: color-mix(in srgb, var(--fg), var(--accent) 15%);
+  transition: background .2s ease, border-color .2s ease;
+  font-size: 13px;
 }
-
 .drop-slot.dragover {
-  background: color-mix(in srgb, var(--card), var(--accent) 9%);
+  background: color-mix(in srgb, var(--accent), transparent 84%);
   border-color: var(--accent);
 }
 
 /* Kafle */
 .tiles { display: grid; gap: 10px; }
 .tile {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  background: var(--card) !important;
+  color: var(--fg) !important;
   padding: 12px;
-}
-.tile div {
-  color: var(--fg);
-}
-.tile table, .tile th, .tile td {
-  border: 1px solid var(--border);
-  color: var(--fg);
-}
-
-  transition: transform .06s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+  box-shadow: var(--shadow);
   cursor: grab;
+  transition: transform .06s ease, box-shadow .2s ease, border-color .2s ease;
 }
 .tile:hover {
   border-color: color-mix(in srgb, var(--border), var(--fg) 25%);
@@ -174,8 +140,26 @@ code {
 }
 .tile:active { cursor: grabbing; transform: translateY(1px); }
 .tile-title { font-weight: 650; margin-bottom: 8px; }
+.tile .btn { margin-top: 8px; }
 
-/* Preferencje ruchu */
+/* Podgląd HTML w kaflu – przyciemnij tabelki itp. */
+.tile table { border-collapse: collapse; width: 100%; }
+.tile th, .tile td {
+  border: 1px solid var(--border) !important;
+  color: var(--fg) !important;
+  padding: 6px;
+}
+.tile blockquote {
+  border-left: 4px solid color-mix(in srgb, var(--fg), transparent 60%) !important;
+  margin: 0; padding-left: 10px; color: var(--fg) !important;
+}
+
+/* Preferencje ograniczania animacji */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; }
+}
+
+/* (Opcjonalnie) Szacunek dla trybu wymuszonych kolorów – dla czytelności */
+@media (forced-colors: active) {
+  :root { --bg: Canvas; --fg: CanvasText; --card: Canvas; --border: GrayText; --accent: Highlight; --accent-contrast: HighlightText; }
 }
