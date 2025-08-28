@@ -7,8 +7,8 @@
   xsi:type="TaskPaneApp"
   Version="1.0.0.0">
 
-  <!-- ====== PODSTAWY ====== -->
-  <!-- ZMIEŃ NA WŁASNY GUID (np. użyj 'uuidgen') -->
+  <!-- ====== BASICS ====== -->
+  <!-- ZMIEŃ NA WŁASNY GUID -->
   <Id>7b9e5d2d-2d3c-4a8c-9f0a-2db9a9e0a001</Id>
   <Version>1.0.0.0</Version>
   <ProviderName>AddNap</ProviderName>
@@ -16,7 +16,7 @@
 
 
   <DisplayName DefaultValue="Word Tiles Add-in"/>
-  <Description DefaultValue="Tiles based on Content Controls with Inspector and validation."/>
+  <Description DefaultValue="Tiles based on Content Controls with Inspector &amp; validation."/>
 
   <!-- Ikony bazowe (dla starszych hostów) -->
   <IconUrl DefaultValue="assets/icon-32.png"/>
@@ -29,7 +29,7 @@
     <Host Name="Document"/>
   </Hosts>
 
-  <!-- Wymagania API: dopasuj do faktycznie używanych funkcji -->
+  <!-- Wymagania API -->
   <Requirements>
     <Sets DefaultMinVersion="1.1">
       <Set Name="WordApi" MinVersion="1.3"/>
@@ -41,7 +41,7 @@
     <SourceLocation DefaultValue="taskpane.html"/>
   </DefaultSettings>
 
-  <!-- Uprawnienia: edycja dokumentu -->
+  <!-- Uprawnienia -->
   <Permissions>ReadWriteDocument</Permissions>
 
   <!-- ====== VERSION OVERRIDES ====== -->
@@ -52,7 +52,7 @@
       <ov:Host xsi:type="ov:Document">
         <ov:DesktopFormFactor>
 
-          <!-- Plik z funkcjami komend (commands.html) -->
+          <!-- Plik z funkcjami komend -->
           <ov:FunctionFile resid="residCommandsHtml"/>
 
           <!-- Wstążka: grupa "Tiles" na karcie Home -->
@@ -84,7 +84,7 @@
                   </ov:Action>
                 </ov:Control>
 
-                <!-- Przycisk otwierający panel (na wypadek, gdyby był zamknięty) -->
+                <!-- Przycisk otwierający panel -->
                 <ov:Control xsi:type="ov:Button" id="btnShowPane">
                   <ov:Label resid="residShowPaneLabel"/>
                   <ov:Supertip>
@@ -109,7 +109,7 @@
       </ov:Host>
     </ov:Hosts>
 
-    <!-- Zasoby: URL-e, obrazy i stringi wykorzystywane wyżej -->
+    <!-- Zasoby: URL-e, obrazy i stringi -->
     <ov:Resources>
       <!-- Ikony -->
       <ov:bt:Images>
