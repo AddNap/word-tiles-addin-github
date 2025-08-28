@@ -4,9 +4,16 @@
   <meta charset="utf-8" />
   <title>Word Tiles</title>
   <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self' https: data: blob: 'unsafe-inline' 'unsafe-eval';">
-  <link rel="stylesheet" href="./styles.css">
+        content="default-src 'self' https://appsforoffice.microsoft.com https://appsforoffice.microsoft.com/lib/1/hosted/;
+                 script-src 'self' 'unsafe-inline' https://appsforoffice.microsoft.com;
+                 style-src 'self' 'unsafe-inline';
+                 img-src 'self' data:;
+                 connect-src 'self';
+                 frame-ancestors 'self' https://*.office.com https://*.office365.com;">
+  <!-- CSP: zalecenia dla Office Add-ins -->
   <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+  <link rel="stylesheet" href="styles/inspector.css">
+
   <style>
     .section { margin-bottom: 12px; }
     .row { display:flex; gap:8px; align-items:center; flex-wrap: wrap; }
@@ -64,5 +71,30 @@
   </section>
 
   <script src="./scripts/taskpane.js" type="module"></script>
+  <div style="margin-top:12px;">
+  <button id="btn-insert-text" aria-label="Insert Text Tile">Wstaw TextTile</button>
+  <button id="btn-insert-table" aria-label="Insert Table Tile">Wstaw TableTile</button>
+  <button id="btn-insert-image" aria-label="Insert Image Tile">Wstaw ImageTile</button>
+  <button id="btn-insert-cond" aria-label="Insert Condition Tile">Wstaw ConditionTile</button>
+</div>
+
+<div id="tiles-inspector" role="region" aria-label="Tiles Inspector"></div>
+<div style="margin-top:8px;">
+  <button id="btn-validate-tiles">Sprawdź kafelki</button>
+</div>
+
+<script type="module">
+  import { insertTextTile, insertTableTile, insertImageTile, insertConditionTile } from "./scripts/tiles.js";
+  import { validateTiles } from "./scripts/inspector.js";
+
+  document.getElementById("btn-insert-text")?.addEventListener("click", () => insertTextTile({name:"Field"}));
+  document.getElementById("btn-insert-table")?.addEventListener("click", () => insertTableTile({name:"Items", columns:["Name","Qty","Price"]}));
+  document.getElementById("btn-insert-image")?.addEventListener("click", () => insertImageTile({name:"Logo", options:{fit:"contain",maxW:300,maxH:120}}));
+  document.getElementById("btn-insert-cond")?.addEventListener("click", () => insertConditionTile({name:"SectionA", expression:"amount > 0"}));
+
+  // expose validate in global scope for ribbon command if needed
+  window.validateTiles = validateTiles;
+</script>
+
 </body>
 </html>
