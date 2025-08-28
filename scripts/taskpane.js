@@ -280,6 +280,7 @@ function setupDropSlot() {
 
 async function bootstrap() {
   await Office.onReady()
+  initThemeBridge()   // <<<<< NOWE
   setupDropSlot()
   wirePlaceholderForm()
   await refreshPlaceholderList()
