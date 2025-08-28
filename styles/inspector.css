@@ -1,0 +1,5 @@
+/* styles/inspector.css */
+#tiles-inspector { border:1px solid #e2e8f0; border-radius:12px; padding:12px; margin-top:12px; }
+#tiles-inspector .ti-header { font-weight:600; margin-bottom:8px; }
+#tiles-inspector .ti-row { padding:6px 8px; border-radius:8px; background:#fff7ed; margin:4px 0; }
+#tiles-inspector .ti-ok { padding:6px 8px; border-radius:8px; background:#ecfdf5; }
