@@ -46,29 +46,34 @@ h3 {
 
 /* Layout sekcji */
 .section {
-  margin-bottom: 14px;
-  padding: 12px;
-  background: var(--card);
+  background: color-mix(in srgb, var(--bg), #fff 5%); /* ciemny półton */
   border: 1px solid var(--border);
   border-radius: 12px;
-  box-shadow: var(--shadow);
+  padding: 12px;
+  margin-bottom: 14px;
 }
+
 
 .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 
 /* Przycisk */
-.btn {
-  appearance: none;
-  border: 1px solid var(--border);
-  background: linear-gradient(180deg, color-mix(in srgb, var(--card), #000 3%) 0%, var(--card) 100%);
-  color: var(--fg);
-  padding: 8px 12px;
-  border-radius: 10px;
-  font-size: 12px;
+button {
+  all: unset;
+  font: inherit;
   cursor: pointer;
-  transition: transform .04s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease;
 }
-.btn:hover { border-color: color-mix(in srgb, var(--border), var(--fg) 20%); }
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-size: 12px;
+  font-weight: 600;
+}
+.btn:hover { filter: brightness(1.1); }
+
 .btn:active { transform: translateY(1px); }
 .btn.primary {
   border-color: color-mix(in srgb, var(--accent), #000 35%);
@@ -131,15 +136,14 @@ code {
 
 /* Drop-slot */
 .drop-slot {
-  margin: 12px 0;
-  border: 2px dashed color-mix(in srgb, var(--accent), var(--fg) 30%);
-  border-radius: 12px;
-  padding: 12px;
+  border: 2px dashed var(--accent);
+  border-radius: 14px;
+  padding: 14px;
+  background: color-mix(in srgb, var(--accent), transparent 90%);
+  font-size: 13px;
   text-align: center;
-  background: color-mix(in srgb, var(--card), var(--accent) 5%);
-  color: color-mix(in srgb, var(--fg), var(--accent) 15%);
-  transition: background .2s ease, border-color .2s ease;
 }
+
 .drop-slot.dragover {
   background: color-mix(in srgb, var(--card), var(--accent) 9%);
   border-color: var(--accent);
@@ -148,11 +152,19 @@ code {
 /* Kafle */
 .tiles { display: grid; gap: 10px; }
 .tile {
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: 12px;
-  background: var(--card);
   padding: 12px;
-  box-shadow: var(--shadow);
+}
+.tile div {
+  color: var(--fg);
+}
+.tile table, .tile th, .tile td {
+  border: 1px solid var(--border);
+  color: var(--fg);
+}
+
   transition: transform .06s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
   cursor: grab;
 }
