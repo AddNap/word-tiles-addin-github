@@ -41,21 +41,6 @@ h3 { margin: 0 0 10px; font-size: 16px; letter-spacing: .2px; }
 }
 .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 
-/* Przycisk */
-.btn {
-  display: inline-block;
-  padding: 8px 12px;
-  border-radius: 10px;
-  border: 1px solid color-mix(in srgb, var(--accent), #000 35%);
-  background: linear-gradient(180deg, color-mix(in srgb, var(--accent), #fff 12%) 0%, var(--accent) 100%);
-  color: var(--accent-contrast);
-  font-size: 12px;
-  font-weight: 600;
-  transition: filter .15s ease, transform .06s ease, box-shadow .2s ease;
-  box-shadow: 0 6px 18px color-mix(in srgb, var(--accent), transparent 75%);
-}
-.btn:hover { filter: brightness(1.08); }
-.btn:active { transform: translateY(1px); }
 
 /* Pola */
 .input, select.input {
@@ -155,22 +140,86 @@ code {
 }
 
 /* --- Nadpisania mocne, żeby ignorować style Office --- */
-button, .btn {
-  all: unset;
-  display: inline-block;
-  padding: 8px 12px !important;
-  border-radius: 10px !important;
-  border: 1px solid var(--accent) !important;
-  background: var(--accent) !important;
-  color: var(--accent-contrast) !important;
-  font-size: 12px !important;
-  font-weight: 600 !important;
-  cursor: pointer !important;
-  text-align: center !important;
+/* ===== UNIWERSALNE PRZYCISKI ===== */
+button { all: unset; font: inherit; }
+.btn {
+  --btn-bg: var(--accent);
+  --btn-fg: var(--accent-contrast);
+  --btn-bd: color-mix(in srgb, var(--accent), #000 35%);
+  --btn-shadow: 0 6px 18px color-mix(in srgb, var(--accent), transparent 75%);
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px;
+  min-height: 34px; padding: 0 12px;
+  border-radius: 10px; border: 1px solid var(--btn-bd);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--btn-bg), #fff 14%) 0%, var(--btn-bg) 100%);
+  color: var(--btn-fg);
+  font-size: 12px; font-weight: 600; letter-spacing: .2px;
+  box-shadow: var(--btn-shadow);
+  cursor: pointer; user-select: none;
+  transition: filter .15s ease, transform .06s ease, box-shadow .2s ease, border-color .2s ease;
 }
-button:hover, .btn:hover {
-  filter: brightness(1.1);
+.btn:hover { filter: brightness(1.06); }
+.btn:active { transform: translateY(1px); }
+.btn:focus-visible { outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent), transparent 75%), var(--btn-shadow); }
+
+/* Rozmiary */
+.btn.sm { min-height: 28px; padding: 0 10px; font-size: 11px; }
+.btn.lg { min-height: 40px; padding: 0 14px; font-size: 13px; }
+
+/* Warianty */
+.btn.secondary {
+  --btn-bg: color-mix(in srgb, var(--card), var(--fg) 10%);
+  --btn-fg: var(--fg);
+  --btn-bd: var(--border);
+  --btn-shadow: 0 6px 18px rgba(0,0,0,.15);
 }
+.btn.ghost {
+  --btn-bg: transparent;
+  --btn-fg: var(--fg);
+  --btn-bd: var(--border);
+  --btn-shadow: none;
+  background: color-mix(in srgb, var(--card), transparent 100%);
+}
+.btn.ghost:hover {
+  background: color-mix(in srgb, var(--card), var(--fg) 6%);
+}
+
+/* Ikonowy */
+.btn.icon {
+  width: 34px; padding: 0; aspect-ratio: 1/1; min-height: 34px;
+  box-shadow: none;
+}
+.btn .icon16 { width: 16px; height: 16px; display: inline-block; }
+
+/* Disabled / Loading */
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  cursor: not-allowed;
+  filter: grayscale(.2) opacity(.6);
+  box-shadow: none;
+}
+.btn.is-loading { pointer-events: none; position: relative; }
+.btn.is-loading::after {
+  content: ""; width: 14px; height: 14px; border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--btn-fg), transparent 70%);
+  border-top-color: var(--btn-fg);
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Przyciski w sekcjach i kaflach */
+.section .btn { margin-top: 6px; }
+.tile .btn { margin-top: 8px; }
+
+/* Stylowanie <summary> jak przycisku (detale „Dodaj placeholder”) */
+details > summary {
+  list-style: none; cursor: pointer; padding: 6px 10px;
+  border: 1px solid var(--border); border-radius: 8px;
+  background: color-mix(in srgb, var(--card), var(--fg) 4%); font-weight: 700;
+}
+details[open] > summary { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+details > summary::-webkit-details-marker { display: none; }
+
 
 .section {
   background: var(--card) !important;
