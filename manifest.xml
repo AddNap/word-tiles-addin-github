@@ -7,7 +7,7 @@
   xsi:type="TaskPaneApp">
 
   <!-- Własny GUID -->
-  <Id>aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee</Id>
+  <Id>7b9e5d2d-2d3c-4a8c-9f0a-2db9a9e0a001</Id>  
   <Version>1.0.0.0</Version>
   <ProviderName>AddNap</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
@@ -16,8 +16,8 @@
   <Description DefaultValue="Tiles based on Content Controls with Inspector &amp; validation."/>
 
   <!-- Ikony: HTTPS, brak redirectów, poprawne wymiary -->
-  <IconUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-32.png"/>
-  <HighResolutionIconUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-128.png"/>
+  <IconUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-16.png"/>
+  <HighResolutionIconUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-80.png"/>
 
   <!-- Support URL (HTTPS) -->
   <SupportUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/support.html"/>
@@ -100,9 +100,9 @@
     <ov:Resources>
       <!-- Ikony dla wstążki (mogą być te same) -->
       <ov:bt:Images>
-        <ov:bt:Image id="icon16" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-32.png"/>
+        <ov:bt:Image id="icon16" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-16.png"/>
         <ov:bt:Image id="icon32" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-32.png"/>
-        <ov:bt:Image id="icon80" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-128.png"/>
+        <ov:bt:Image id="icon80" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-80.png"/>
       </ov:bt:Images>
 
       <ov:bt:Urls>
