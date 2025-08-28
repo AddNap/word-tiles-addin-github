@@ -15,11 +15,9 @@
   <Description DefaultValue="Tiles based on Content Controls with Inspector &amp; validation."/>
 
   <!-- Ikony hostowane na GitHub Pages -->
-  <IconUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-32.png"/>
-  <HighResolutionIconUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-80.png"/>
+  <IconUrl DefaultValue="assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="assets/icon-80.png"/>
 
-  <!-- Strona wsparcia -->
-  <SupportUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/support.html"/>
 
   <!-- Host: Word -->
   <Hosts>
@@ -35,7 +33,7 @@
 
   <!-- Domyślna lokalizacja panelu -->
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://addnap.github.io/word-tiles-addin-github/taskpane.html"/>
+    <SourceLocation DefaultValue="taskpane.html"/>
   </DefaultSettings>
 
   <!-- Uprawnienia -->
@@ -101,15 +99,15 @@
     <ov:Resources>
       <!-- Ikony dla wstążki -->
       <ov:bt:Images>
-        <ov:bt:Image id="icon16" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-16.png"/>
-        <ov:bt:Image id="icon32" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-32.png"/>
-        <ov:bt:Image id="icon80" DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-80.png"/>
+        <ov:bt:Image id="icon16" DefaultValue="assets/icon-16.png"/>
+        <ov:bt:Image id="icon32" DefaultValue="assets/icon-32.png"/>
+        <ov:bt:Image id="icon80" DefaultValue="icon-80.png"/>
       </ov:bt:Images>
 
       <!-- Pliki HTML -->
       <ov:bt:Urls>
-        <ov:bt:Url id="residTaskpaneHtml" DefaultValue="https://addnap.github.io/word-tiles-addin-github/taskpane.html"/>
-        <ov:bt:Url id="residCommandsHtml" DefaultValue="https://addnap.github.io/word-tiles-addin-github/commands.html"/>
+        <ov:bt:Url id="residTaskpaneHtml" DefaultValue="taskpane.html"/>
+        <ov:bt:Url id="residCommandsHtml" DefaultValue="commands.html"/>
       </ov:bt:Urls>
 
       <!-- Teksty krótkie -->
