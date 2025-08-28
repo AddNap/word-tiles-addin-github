@@ -1,11 +1,15 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <title>Commands</title>
-  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-</head>
-<body>
-  Commands host file
-</body>
-</html>
+<!-- commands.html, add near end of body -->
+<script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+<script>
+  function validateTilesCommand(event) {
+    // Runs in commands page context; open taskpane and call exposed function if needed
+    Office.addin.showAsTaskpane().then(() => {
+      // Try to call validate in taskpane (exposed as window.validateTiles)
+      Office.context.ui.messageParent && Office.context.ui.messageParent("validate");
+      // Fallback: simple notification
+      Office.context.document.setSelectedDataAsync("Running tiles validation...");
+      event.completed();
+    });
+  }
+</script>
+
