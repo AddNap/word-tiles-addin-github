@@ -1,0 +1,25 @@
+:root { font-family: system-ui, sans-serif; }
+body { margin: 0; padding: 12px; }
+header { margin-bottom: 8px; }
+h3 { margin: 0 0 8px; }
+
+.drop-slot {
+  border: 1.5px dashed #b8b8b8;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  color: #444;
+}
+.drop-slot.dragover { background: rgba(0,0,0,.03); }
+
+.tiles { display: grid; gap: 8px; }
+
+.tile {
+  border: 1px solid #ddd; border-radius: 10px;
+  padding: 12px; background: #fff;
+  cursor: grab;
+}
+.tile:active { cursor: grabbing; }
+.tile-title { font-weight: 600; margin-bottom: 6px; }
+.tile-footer { font-size: 12px; opacity: .6; margin-top: 8px; }
