@@ -16,7 +16,7 @@
 
 
   <DisplayName DefaultValue="Word Tiles Add-in"/>
-  <Description DefaultValue="Tiles based on Content Controls with Inspector & validation."/>
+  <Description DefaultValue="Tiles based on Content Controls with Inspector and validation."/>
 
   <!-- Ikony bazowe (dla starszych hostów) -->
   <IconUrl DefaultValue="assets/icon-32.png"/>
