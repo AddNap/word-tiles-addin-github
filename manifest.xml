@@ -16,8 +16,8 @@
   <Description DefaultValue="Tiles based on Content Controls with Inspector &amp; validation."/>
 
   <!-- Ikony: HTTPS, brak redirectów, poprawne wymiary -->
-  <IconUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-16.png"/>
-  <HighResolutionIconUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-80.png"/>
+  <IconUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/assets/icon-128.png"/>
 
   <!-- Support URL (HTTPS) -->
   <SupportUrl DefaultValue="https://addnap.github.io/word-tiles-addin-github/support.html"/>
